@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- rplidar_ros -->
+  <node pkg="rplidar_ros" type="rplidarNode" name="rplidarNode" output="screen">
+    <param name="serial_port" type="string" value="/dev/RPLIDAR"/>
+    <param name="frame_id" type="string" value="laser"/>
+  </node>
+  
+  <!-- laser_filters-->
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="scan_to_scan_filter_chain" output="screen">
+    <rosparam command="load" file="$(find nav_lecture)/param/laser_filters.yaml" />
+    <param name="frame_id" type="string" value="laser"/>
+  </node>
+
+  <!-- tf stuff -->
+  <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_laser" args="0 0 0.1 0 0 0 base_footprint laser 100" />
+</launch>

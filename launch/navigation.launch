@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<launch>
+  <!-- load default map file when argument isn't given -->
+  <arg name="map_file" default="$(find nav_lecture)/map/bushitu.yaml" />
+  
+  <!-- map_server -->
+  <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)" />
+  
+  <!-- emcl -->
+  <include file="$(find emcl)/launch/emcl.launch" >
+    <arg name="scan_topic" value="scan_filtered" />
+  </include>
+
+  <!-- move_base -->
+  <include file="$(find nav_lecture)/launch/includes/move_base.launch" />
+
+  <!-- rviz -->
+  <include file="$(find turtlebot_rviz_launchers)/launch/view_navigation.launch" />
+</launch>

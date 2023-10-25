@@ -1,0 +1,10 @@
+# http://wiki.ros.org/laser_filters
+scan_filter_chain:
+- name: range_filter
+  type: laser_filters/LaserScanRangeFilter
+  params:
+    use_message_range_limits: false
+    lower_threshold: 0.2
+    upper_threshold: 16.0
+    lower_replacement_value: .inf
+    upper_replacement_value: .inf

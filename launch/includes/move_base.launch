@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<launch>
+  <!-- move_base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <!-- costmap stuff  -->
+    <rosparam file="$(find turtlebot_navigation)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find turtlebot_navigation)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find turtlebot_navigation)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot_navigation)/param/local_costmap_params.yaml" command="load" />
+
+    <!-- paramaters -->
+    <rosparam file="$(find turtlebot_navigation)/param/move_base_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot_navigation)/param/dwa_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot_navigation)/param/global_planner_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot_navigation)/param/navfn_global_planner_params.yaml" command="load" />
+  
+    <rosparam file="$(find nav_lecture)/param/costmap_params.yaml" command="load" />
+  
+    <!-- tf stuff -->
+    <param name="global_costmap/global_frame" value="map" />
+    <param name="global_costmap/robot_base_frame" value="base_footprint" />
+
+    <param name="local_costmap/global_frame" value="odom" />
+    <param name="local_costmap/robot_base_frame" value="base_footprint" />
+    <param name="local_costmap/laser_scan_sensor_frame" value="laser" />
+
+    <!-- change scan topic -->
+    <param name="local_costmap/laser_scan_sensor_topic" value="scan_filtered" />
+
+    <!-- change velocity topic -->
+    <remap from="/cmd_vel" to="/mobile_base/commands/velocity" />
+  </node>
+</launch>

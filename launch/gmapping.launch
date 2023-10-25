@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+  <!-- gmapping -->
+  <include file="$(find turtlebot_navigation)/launch/includes/gmapping/gmapping.launch.xml" >
+    <arg name="scan_topic" value="scan_filtered" />
+  </include>
+  
+  <!-- rviz -->
+  <include file="$(find turtlebot_rviz_launchers)/launch/view_navigation.launch" />
+</launch>
