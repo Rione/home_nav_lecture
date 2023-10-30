@@ -8,3 +8,5 @@ cd ~/catkin_ws
 catkin_make
 . devel/setup.bash
 ```
+
+[資料](lecture/index.md)を見ながら実際に動かしてみましょう。
