@@ -79,6 +79,8 @@ catkin_make
     - `laser_filters`ノードはロボットの支柱(半径0.2m)のデータをフィルタリングして値を`.inf`にする
 - `launch/gmapping.launch`
     - SLAMを立ち上げるlaunchファイル
+- `launch/teleop_joy.launch`
+    - ジョイスティックを使ってロボットを動かせるようにするlaunchファイル
 - `launch/navigation.launch`
     - ナビゲーションを立ち上げるlaunchファイル
 - `launch/includes/move_base.launch`
@@ -110,13 +112,20 @@ roslaunch nav_lecture gmapping.launch
 するとRvizが立ち上がります。
 
 ロボットがいい感じに地図を作れるように動かしましょう。
-以下のコマンドはキーボードでロボットを動かせます。
+以下のlaunchファイルはキーボードでロボットを動かせます。
 
 ```bash
 roslaunch turtlebot_teleop keyboard_teleop.launch
 ```
 
-コツとしてはゆっくり動かして、時々1回転させて360度読み取ることです。
+キーボードの操作はちょっと難しいのでゲームのコントローラを使って動かせるようにしました。
+以下のlaunchファイルはコントローラでロボットを動かせます。
+
+```bash
+roslaunch nav_lecture teleop_joy.launch
+```
+
+コツはゆっくり動かして、時々1回転させて360度読み取ることです。
 
 ### 地図の見かた
 
@@ -205,6 +214,14 @@ roslaunch nav_lecture navigation.launch map_file:=$HOME/map/bushitu.yaml
 ![navigation_send_goal](navigation_send_goal.gif)
 
 終わったらすべてのlaunchファイルを`Ctrl-C`で終了しましょう。
+
+### プログラムの中でゴール地点を送る
+
+ROSのアクション通信を用いてゴール地点を送ります。
+詳しいものは`scripts/send_goal.py`を見てください。
+メッセージの型は[`MoveBaseAction`](http://docs.ros.org/en/fuerte/api/move_base_msgs/html/msg/MoveBaseAction.html)です。
+リクエストのメッセージに[`MoveBaseGoal`](http://docs.ros.org/en/fuerte/api/move_base_msgs/html/msg/MoveBaseGoal.html)でゴール地点のx、y座標、ゴール地点でのロボットの向いている方向を指定します。
+向いている方向は四元数で表現されています。
 
 ## 参考文献
 
