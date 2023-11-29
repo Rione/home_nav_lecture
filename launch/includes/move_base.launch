@@ -23,10 +23,10 @@
 
     <param name="local_costmap/global_frame" value="odom" />
     <param name="local_costmap/robot_base_frame" value="base_footprint" />
-    <param name="local_costmap/laser_scan_sensor_frame" value="laser" />
 
-    <!-- change scan topic -->
-    <param name="local_costmap/laser_scan_sensor_topic" value="scan_filtered" />
+    <!-- change scan topic to scan_filtered -->
+    <param name="global_costmap/obstacle_layer/scan/topic" value="scan_filtered" />
+    <param name="local_costmap/obstacle_layer/scan/topic" value="scan_filtered" />
 
     <!-- change velocity topic -->
     <remap from="/cmd_vel" to="/mobile_base/commands/velocity" />

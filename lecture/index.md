@@ -127,6 +127,10 @@ roslaunch nav_lecture teleop_joy.launch
 
 コツはゆっくり動かして、時々1回転させて360度読み取ることです。
 
+ノード間の通信はこのようになっています。
+
+![1700731361.png](1700731361.png)
+
 ### 地図の見かた
 
 見かたと言ってもそのまま、見ての通りです。
@@ -187,6 +191,10 @@ roslaunch nav_lecture minimal.launch
 roslaunch nav_lecture rplidar.launch
 roslaunch nav_lecture navigation.launch map_file:=$HOME/map/bushitu.yaml
 ```
+
+ノード間の通信はこのようになっています。
+
+![1700731368.png](1700731368.png)
 
 ### 初期姿勢の推定
 
